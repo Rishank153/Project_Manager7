@@ -1,16 +1,30 @@
 {
-  "installCommand": "npm install --legacy-peer-deps",  // Fixed typo in "legacy"
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
+      "src": "server/server.js",  // Correct path to server file
       "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",  // For frontend framework detection
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"  // Or "public" depending on your frontend
+      }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "src": "/api/(.*)",  // API routes go to Node.js
+      "dest": "server/server.js"
+    },
+    {
+      "src": "/(.*)",  // All other routes go to frontend
+      "dest": "/build/index.html",  // Or "/public/index.html"
+      "headers": {
+        "Cache-Control": "s-maxage=0, stale-while-revalidate=60"
+      }
     }
-  ]
+  ],
+
 }
