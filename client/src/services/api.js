@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'https://vercel.com/rishank-rajputs-projects/project-manager7-b6hz/api',
+    baseURL: process.env.REACT_APP_API_URL || 'https://project-manager7.onrender.com',
 });
 
 // Request Interceptor
