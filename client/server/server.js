@@ -14,8 +14,13 @@ seedAdmin();
 const app = express();
 
 
-// Middleware
-app.use(cors());
+const corsOptions = {
+  origin: 'https://project-manager7-1frontendclient.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
